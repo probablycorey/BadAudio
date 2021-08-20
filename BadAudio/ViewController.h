@@ -6,8 +6,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MacOSAudioLevel.h"
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController 
 
 
 @end
