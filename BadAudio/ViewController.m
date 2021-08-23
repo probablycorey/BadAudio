@@ -6,13 +6,13 @@
 //
 
 #import "ViewController.h"
-#import "MacOSDevices.h"
+#import <AVFoundation/AVFoundation.h>
 
 
 @implementation ViewController
 
-MacOSAudioLevel *audioLevel;
-NSTimer *timer;
+AVCaptureSession *session;
+AVCaptureAudioDataOutput *output;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,33 +21,62 @@ NSTimer *timer;
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
-
-    // Update the view, if already loaded.
 }
 
 - (IBAction)start:(id)sender {
-// Use this to get the airPod id
-// NSMutableDictionary<NSString *, NSMutableDictionary *> *devices = [MacOSDevices audio];
-// NSLog(@"%@", devices);
+    NSString *airPodId = [self airPodId];
+    if (!airPodId) {
+        NSLog(@"No airpods found, you need airpods (or some other bluetooth audio) to see this bug");
+        exit(1);
+    }
     
-    NSString *airPodsId = @"e4-90-fd-8f-8c-56:input";
-    audioLevel = [[MacOSAudioLevel alloc] init];
-    [audioLevel start:airPodsId];
+    session = [[AVCaptureSession alloc] init];
+    AVCaptureDevice *audioDevice = [AVCaptureDevice deviceWithUniqueID:airPodId];
     
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.5
-        target:self
-        selector:@selector(level)
-        userInfo:nil
-        repeats:YES];
+    AVCaptureDeviceInput *audioDeviceinput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:nil];
+    output = [AVCaptureAudioDataOutput new];
+    
+    if (![session canAddInput:audioDeviceinput]) {
+        NSLog(@"FAILED TO ADD INPUT");
+        exit(1);
+    }
+    
+    if (![session canAddOutput:output]) {
+        NSLog(@"FAILED TO ADD OUTPUT");
+        exit(1);
+    }
+    
+    [session beginConfiguration];
+    [session addInput:audioDeviceinput];
+    [session addOutput:output];
+    [session commitConfiguration];
+
+    [session startRunning];
 }
 
 - (IBAction)stop:(id)sender {
-    [timer invalidate];
-    [audioLevel stop];
+    [session stopRunning];
 }
 
-- (void)level {
-    NSLog(@"%f", [audioLevel getAverageLevel]);
+
+- (NSString *)airPodId {
+    if ([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio] == AVAuthorizationStatusAuthorized) {
+        AVCaptureDeviceDiscoverySession *session = [AVCaptureDeviceDiscoverySession
+                    discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInMicrophone]
+                    mediaType:AVMediaTypeAudio
+                    position:AVCaptureDevicePositionUnspecified];
+
+        NSArray<AVCaptureDevice *> *devices = [session devices];
+        
+        for (AVCaptureDevice *audioDevice in devices) {
+            if ([[audioDevice localizedName] containsString:@"Beoplay"]) {
+                NSLog(@"Using device named %@ with id %@", [audioDevice localizedName], [audioDevice uniqueID]);
+                return [audioDevice uniqueID];
+            }
+        }
+    }
+    
+    return nil;
 }
 
 @end

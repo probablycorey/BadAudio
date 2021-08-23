@@ -12,8 +12,6 @@
 		16F403AA26D0582100ECEC5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16F403A926D0582100ECEC5C /* Assets.xcassets */; };
 		16F403AD26D0582100ECEC5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16F403AB26D0582100ECEC5C /* Main.storyboard */; };
 		16F403B026D0582100ECEC5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F403AF26D0582100ECEC5C /* main.m */; };
-		16F403B926D0585800ECEC5C /* MacOSAudioLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F403B726D0585800ECEC5C /* MacOSAudioLevel.m */; };
-		16F403BC26D0586F00ECEC5C /* MacOSDevices.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F403BB26D0586F00ECEC5C /* MacOSDevices.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,10 +25,6 @@
 		16F403AE26D0582100ECEC5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16F403AF26D0582100ECEC5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16F403B126D0582100ECEC5C /* BadAudio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BadAudio.entitlements; sourceTree = "<group>"; };
-		16F403B726D0585800ECEC5C /* MacOSAudioLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MacOSAudioLevel.m; path = ../../record/src/native/macos/MacOSAudioLevel.m; sourceTree = "<group>"; };
-		16F403B826D0585800ECEC5C /* MacOSAudioLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSAudioLevel.h; path = ../../record/src/native/macos/MacOSAudioLevel.h; sourceTree = "<group>"; };
-		16F403BA26D0586F00ECEC5C /* MacOSDevices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacOSDevices.h; path = ../../record/src/native/macos/MacOSDevices.h; sourceTree = "<group>"; };
-		16F403BB26D0586F00ECEC5C /* MacOSDevices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MacOSDevices.m; path = ../../record/src/native/macos/MacOSDevices.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,10 +61,6 @@
 				16F403A426D0582000ECEC5C /* AppDelegate.m */,
 				16F403A626D0582000ECEC5C /* ViewController.h */,
 				16F403A726D0582000ECEC5C /* ViewController.m */,
-				16F403B826D0585800ECEC5C /* MacOSAudioLevel.h */,
-				16F403B726D0585800ECEC5C /* MacOSAudioLevel.m */,
-				16F403BA26D0586F00ECEC5C /* MacOSDevices.h */,
-				16F403BB26D0586F00ECEC5C /* MacOSDevices.m */,
 				16F403A926D0582100ECEC5C /* Assets.xcassets */,
 				16F403AB26D0582100ECEC5C /* Main.storyboard */,
 				16F403AE26D0582100ECEC5C /* Info.plist */,
@@ -148,9 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16F403BC26D0586F00ECEC5C /* MacOSDevices.m in Sources */,
 				16F403A826D0582000ECEC5C /* ViewController.m in Sources */,
-				16F403B926D0585800ECEC5C /* MacOSAudioLevel.m in Sources */,
 				16F403B026D0582100ECEC5C /* main.m in Sources */,
 				16F403A526D0582000ECEC5C /* AppDelegate.m in Sources */,
 			);
