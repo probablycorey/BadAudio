@@ -69,7 +69,8 @@ AVCaptureAudioDataOutput *output;
         NSArray<AVCaptureDevice *> *devices = [session devices];
         
         for (AVCaptureDevice *audioDevice in devices) {
-            if ([[audioDevice localizedName] containsString:@"Beoplay"]) {
+            NSLog(@"Device available: %@", [audioDevice localizedName]);
+            if ([[audioDevice localizedName] containsString:@"AirPods"]) {
                 NSLog(@"Using device named %@ with id %@", [audioDevice localizedName], [audioDevice uniqueID]);
                 return [audioDevice uniqueID];
             }
